@@ -1,3 +1,4 @@
+library(doBy)
 # Read feature and activity labels - common to both datasets
 features <- read.table("UCI HAR Dataset/features.txt")
 activity_labels <- read.table("UCI HAR Dataset/activity_labels.txt")
@@ -31,7 +32,7 @@ train <- cbind(subject, activity, x)
 complete <- rbind(train, test)
 
 # Calculate summary
-summary <- summaryBy(.~activity+subject,data=complete,FUN=mean)
+summary <- summaryBy(.~subject+activity,data=complete,FUN=mean)
 
 # Assign feature names to columns
 colnames(summary) <- c("subject", "activity", as.vector(meanAndStdColumns$V2))
